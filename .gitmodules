@@ -1,0 +1,3 @@
+[submodule "kaniko"]
+	path = kaniko
+	url = https://github.com/GoogleContainerTools/kaniko.git
