@@ -13,7 +13,7 @@ Build:
     - k8s:shared
     - arch:amd64
   script:
-    - /kaniko/executor --context $CI_PROJECT_DIR/kaniko --cache=true --cache-dir=/cache --dockerfile $CI_PROJECT_DIR/kaniko/deploy/Dockerfile_debug --destination kaniko.debug-local
+    - /kaniko/executor --context $CI_PROJECT_DIR/kaniko --cache=true --cache-dir=/cache  --cache-repo --dockerfile $CI_PROJECT_DIR/kaniko/deploy/Dockerfile_debug --destination kaniko.debug-local --no-push
   cache:
     key: ${CI_COMMIT_SHA}
     paths:
