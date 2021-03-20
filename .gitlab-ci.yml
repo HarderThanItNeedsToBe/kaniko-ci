@@ -6,6 +6,8 @@ variables:
 
 Build:
   stage: Build
+  services:
+    - registry
   image:
     name: gcr.io/kaniko-project/executor:debug
     entrypoint: [ "" ]
@@ -13,9 +15,4 @@ Build:
     - k8s:shared
     - arch:amd64
   script:
-    - /kaniko/executor --context=$CI_PROJECT_DIR/kaniko --cache=true --cache-dir=/cache  --dockerfile="$CI_PROJECT_DIR/kaniko/deploy/Dockerfile_debug" --destination=local --no-push --tarPath=/cache/kaniko.tar
-  cache:
-    key: ${CI_COMMIT_SHA}
-    paths:
-      - /cache
-    policy: push
+    - /kaniko/executor --context=$CI_PROJECT_DIR/kaniko  --dockerfile="$CI_PROJECT_DIR/kaniko/deploy/Dockerfile_debug" --destination=registry:5000/kaniko
