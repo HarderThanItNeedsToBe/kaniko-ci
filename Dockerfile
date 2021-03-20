@@ -1,8 +1,10 @@
 FROM ubuntu:20.04
+
+ARG FROMPLACE=kaniko:local
+
 # Add .docker config dir
 RUN mkdir -p /kaniko/.docker
-COPY --from=
-COPY --from=gcr.io/kaniko-project/executor:debug /kaniko/executor /usr/local/bin/kaniko
+COPY --from=$FROMPLACE /kaniko/executor /usr/local/bin/kaniko
 COPY kaniko/files/nsswitch.conf /etc/nsswitch.conf
 ENV HOME /root
 ENV USER root
