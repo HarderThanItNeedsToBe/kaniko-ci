@@ -15,4 +15,4 @@ Build:
     - k8s:shared
     - arch:amd64
   script:
-    - /kaniko/executor --context=$CI_PROJECT_DIR/kaniko  --dockerfile="$CI_PROJECT_DIR/kaniko/deploy/Dockerfile_debug" --destination=registry:5000/kaniko
+    - /kaniko/executor --insecure --context=$CI_PROJECT_DIR/kaniko  --dockerfile="$CI_PROJECT_DIR/kaniko/deploy/Dockerfile_debug" --destination=registry:5000/kaniko
