@@ -1,0 +1,27 @@
+stages:
+  - Build
+
+variables:
+  GIT_SUBMODULE_STRATEGY: recursive
+
+Build:
+  stage: Build
+  image:
+    name: gcr.io/kaniko-project/executor:debug
+    entrypoint: [ "" ]
+  tags:
+    - k8s:shared
+    - arch:amd64
+  script:
+    - |
+      /kaniko/executor --context $CI_PROJECT_DIR/kaniko \
+        --cache=true \
+        --cache-dir \
+        --dockerfile $CI_PROJECT_DIR/kaniko/deploy/Dockerfile_debug \
+        --destination kaniko.debug-local \
+        --no-push
+  cache:
+    key: ${CI_COMMIT_SHA}
+    paths:
+      - /cache
+    policy: push
